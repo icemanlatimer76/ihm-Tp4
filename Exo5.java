@@ -1,52 +1,50 @@
 import java.awt.*;
-import java.awt.event.*;                                         
+import java.awt.event.*;
+import javax.swing.*;
 
-public class Exo2 extends Frame implements ActionListener 
-{    
-	private Color[] tabCoul = { Color.BLACK,  		Color.BLUE,
-	  							Color.CYAN,   		Color.DARK_GRAY,
-                    			Color.GRAY,   		Color.GREEN, 
-                    			Color.LIGHT_GRAY, 	Color.MAGENTA,
-                    			Color.ORANGE, 		Color.PINK,  
-                    			Color.RED,        	Color.WHITE      }; 
-	
+public class Exo5 extends JFrame implements ActionListener {
+	private Color[] tabCoul = { Color.BLACK, Color.BLUE, Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN,
+			Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.WHITE };
 
-	public Exo2()
-	{
+	private JButton[] tabButton;
+
+	private JPanel panelBackground;
+
+	public Exo5() {
 		setTitle("Fenetre");
-		setLocation(300,200);
-		bn1 = new Button( " Appliquer " );
-		btn1.addActionListener(this);    
-		add(btn1, "North");
-		btn2 = new Button( " Annuler " );
-		btn2.addActionListener(this);
-		add(this.btn2,"South");
+		setLocation(300, 200);
 
+		JPanel panelPrincipale = new JPanel(new GridLayout(0, 2, 10, 0));
+		JPanel panelCoul = new JPanel(new GridLayout(4, 3, 10, 10));
+		panelBackground = new JPanel();
 
+		tabButton = new JButton[12];
 
-		lstChoix = new List();
+		for (int i = 0; i < 12; i++) {
 
-		lstChoix.add("premier"  );
-		lstChoix.add("second"   );
-		lstChoix.add("troisieme");
-		lstChoix.add("quatrieme");
-		lstChoix.add("cinquieme");
-		lstChoix.add("sixieme"  );
-		lstChoix.add("septieme" );
+			tabButton[i] = new JButton("  ");
+			tabButton[i].setBackground(tabCoul[i]);
+			tabButton[i].addActionListener(this);
+			panelCoul.add(tabButton[i]);
+		}
 
-		lstChoix.addActionListener(this);
-		add(lstChoix,"Center");
-
-		pack();                          
+		panelPrincipale.add(panelCoul);
+		panelPrincipale.add(panelBackground);
+		add(panelPrincipale);
+		pack();
 		setVisible(true);
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		for (int i = 0; i < 12; i++) {
+			if (e.getSource() == tabButton[i]) {
 
-	public void actionPerformed(ActionEvent e)
-	{   
-
-		
+				panelBackground.setBackground(tabCoul[i]);
+			}
+		}
 	}
 
-	public static void main(String [] args) { new Exo2(); }
+	public static void main(String[] args) {
+		new Exo5();
+	}
 }
